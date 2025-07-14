@@ -1,0 +1,12 @@
+{
+  "npm.packageManager": "pnpm",
+  "files.exclude": {
+    ".git": true,
+    "**/*.map": {
+      "when": "$(basename)"
+    },
+    "**/*.js": {
+      "when": "$(basename).d.ts"
+    }
+  }
+}

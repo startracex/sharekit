@@ -1,0 +1,3 @@
+# sharekit
+
+Shared utility toolkit.

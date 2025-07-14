@@ -1,0 +1,50 @@
+{
+  "name": "sharekit",
+  "version": "0.3.0",
+  "description": "Shareable utility toolkit",
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c",
+    "fmt": "dprint fmt"
+  },
+  "devDependencies": {
+    "@startracex/dev-config": "^0.3.0",
+    "@types/node": "^24.0.13",
+    "dprint": "^0.50.1",
+    "rollup": "^4.45.0",
+    "rollup-plugin-oxc": "^0.3.1",
+    "typescript": "^5.8.3"
+  },
+  "exports": {
+    ".": {
+      "require": "./lib/node/index.js",
+      "default": "./lib/index.js"
+    },
+    "./*.js": {
+      "require": "./lib/node/*.js",
+      "default": "./lib/*.js"
+    },
+    "./*": {
+      "require": "./lib/node/*.js",
+      "default": "./lib/*.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "keywords": [
+    "shared",
+    "utilities",
+    "toolkit"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/startracex/sharekit.git"
+  },
+  "author": "startracex",
+  "license": "MIT",
+  "packageManager": "pnpm@10.13.1"
+}
