@@ -18,7 +18,7 @@ export const isBigInt = (value: any): value is bigint => typeof value === "bigin
 export const isFunction = (value: any): value is (...args: any[]) => any =>
   typeof value === "function";
 
-export const isObject = (value: any): value is object & Record<PropertyKey, any> =>
+export const isObject = (value: any): value is object =>
   value !== null && typeof value === "object";
 
 export const isPlainObject = (value: any): value is Record<PropertyKey, any> => {
@@ -43,7 +43,7 @@ export const isPrimitive = (
 export const isArray: (value: any) => value is any[] = Array.isArray;
 
 export const isArrayLike = <T = any>(value: any): value is ArrayLike<T> =>
-  isArray(value) || (isObject(value) && isNumber(value.length));
+  isArray(value) || (isObject(value) && isNumber((value as any).length));
 
 export const isTemplateStringArray = (value: any): value is TemplateStringsArray =>
   isArray(value) && isArray((value as any).raw);
