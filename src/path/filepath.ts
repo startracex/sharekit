@@ -20,3 +20,14 @@ const rel: (typeof Factory)["rel"] = Factory.rel.bind(Factory);
 const isAbs: (typeof Factory)["isAbs"] = Factory.isAbs.bind(Factory);
 
 export { separator, ext, base, dir, clean, join, rel, isAbs };
+
+export {
+  // node:path named exports
+  separator as sep,
+  base as basename,
+  dir as dirname,
+  ext as extname,
+  clean as normalize,
+  rel as relative,
+  isAbs as isAbsolute,
+};

@@ -330,3 +330,14 @@ const rel: (typeof PathWindows)["rel"] = PathWindows.rel.bind(PathWindows);
 const isAbs: (typeof PathWindows)["isAbs"] = PathWindows.isAbs.bind(PathWindows);
 
 export { separator, ext, base, dir, clean, join, rel, isAbs };
+
+export {
+  // node:path named exports
+  separator as sep,
+  base as basename,
+  dir as dirname,
+  ext as extname,
+  clean as normalize,
+  rel as relative,
+  isAbs as isAbsolute,
+};

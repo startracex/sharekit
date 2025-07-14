@@ -68,3 +68,14 @@ const rel: (typeof PathUnix)["rel"] = PathUnix.rel.bind(PathUnix);
 const isAbs: (typeof PathUnix)["isAbs"] = PathUnix.isAbs.bind(PathUnix);
 
 export { separator, ext, base, dir, clean, join, rel, isAbs };
+
+export {
+  // node:path named exports
+  separator as sep,
+  base as basename,
+  dir as dirname,
+  ext as extname,
+  clean as normalize,
+  rel as relative,
+  isAbs as isAbsolute,
+};

@@ -28,3 +28,14 @@ const rel: (typeof PathPlan9)["rel"] = PathPlan9.rel.bind(PathPlan9);
 const isAbs: (typeof PathPlan9)["isAbs"] = PathPlan9.isAbs.bind(PathPlan9);
 
 export { separator, ext, base, dir, clean, join, rel, isAbs };
+
+export {
+  // node:path named exports
+  separator as sep,
+  base as basename,
+  dir as dirname,
+  ext as extname,
+  clean as normalize,
+  rel as relative,
+  isAbs as isAbsolute,
+};
