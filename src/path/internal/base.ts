@@ -243,8 +243,7 @@ export class PathBase {
     }
 
     if (b0 !== bl) {
-      const seps = (processedBase.substring(b0, bl).match(new RegExp(this.separator, "g")) || [])
-        .length;
+      const seps = processedBase.substring(b0, bl).split(this.separator).length - 1;
       let size = 2 + seps * 3;
       if (tl !== t0) {
         size += 1 + (tl - t0);
