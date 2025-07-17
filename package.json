@@ -8,10 +8,10 @@
     "fmt": "dprint fmt"
   },
   "devDependencies": {
-    "@startracex/dev-config": "^0.3.0",
-    "@types/node": "^24.0.13",
+    "@startracex/dev-config": "^0.4.0",
+    "@types/node": "^24.0.14",
     "dprint": "^0.50.1",
-    "rollup": "^4.45.0",
+    "rollup": "^4.45.1",
     "rollup-plugin-oxc": "^0.3.1",
     "typescript": "^5.8.3"
   },
