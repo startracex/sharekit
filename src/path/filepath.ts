@@ -1,14 +1,7 @@
 import { PathUnix } from "./filepath/unix.js";
 import { PathWindows } from "./filepath/windows.js";
 
-let Factory: typeof PathUnix | typeof PathWindows;
-
-const platform = globalThis.process?.platform;
-if (platform === "win32") {
-  Factory = PathWindows;
-} else {
-  Factory = PathUnix;
-}
+const Factory: typeof PathUnix | typeof PathWindows = globalThis.process?.platform === "win32" ? PathWindows : PathUnix;
 
 const separator: (typeof Factory)["separator"] = Factory.separator;
 const ext: (typeof Factory)["ext"] = Factory.ext.bind(Factory);
