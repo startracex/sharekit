@@ -23,9 +23,16 @@ const clean: (typeof PathPlan9)["clean"] = PathPlan9.clean.bind(PathPlan9);
 const join: (typeof PathPlan9)["join"] = PathPlan9.join.bind(PathPlan9);
 const rel: (typeof PathPlan9)["rel"] = PathPlan9.rel.bind(PathPlan9);
 
-export { separator, ext, base, dir, clean, join, rel, isAbs };
-
 export {
+  separator,
+  ext,
+  base,
+  dir,
+  clean,
+  join,
+  rel,
+  isAbs,
+
   // node:path named exports
   separator as sep,
   base as basename,

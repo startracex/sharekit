@@ -323,9 +323,16 @@ const clean: (typeof PathWindows)["clean"] = PathWindows.clean.bind(PathWindows)
 const join: (typeof PathWindows)["join"] = PathWindows.join.bind(PathWindows);
 const rel: (typeof PathWindows)["rel"] = PathWindows.rel.bind(PathWindows);
 
-export { separator, ext, base, dir, clean, join, rel, isAbs };
-
 export {
+  separator,
+  ext,
+  base,
+  dir,
+  clean,
+  join,
+  rel,
+  isAbs,
+
   // node:path named exports
   separator as sep,
   base as basename,
