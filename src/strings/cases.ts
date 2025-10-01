@@ -9,33 +9,12 @@ export const uncapitalize = <T extends string>(s: T): Uncapitalize<T> =>
   (s.slice(0, 1).toLowerCase() + s.slice(1)) as Uncapitalize<T>;
 
 const toCamel = (s: string, u?: boolean): string => {
-  if (!s) {
-    return "";
-  }
   const tokens = splitWords(s).map((s) => s.slice(0, 1).toUpperCase() + s.slice(1).toLowerCase());
-  if (!tokens.length) {
-    return "";
-  }
+  const str = tokens.join("");
   if (u) {
-    const first = tokens.shift()!;
-    return capitalize(first) + tokens.join("");
+    return capitalize(str);
   }
-  return tokens.join("");
-};
-
-const toTitle = (s: string): string => {
-  if (!s) {
-    return "";
-  }
-  const tokens = splitWords(s);
-  if (!tokens.length) {
-    return "";
-  }
-  const first = capitalize(tokens.shift());
-  if (!tokens.length) {
-    return first;
-  }
-  return first + " " + tokens.join(" ");
+  return str;
 };
 
 export const dash = (s: string): string => splitWords(s).join("-").toLowerCase();
@@ -68,4 +47,4 @@ export const macro = (s: string): string => splitWords(s).join("_").toUpperCase(
 /**
  * Converts a string to title case.
  */
-export const title = (s: string): string => toTitle(s);
+export const title = (s: string): string => capitalize(splitWords(s).join(" "));
