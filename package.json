@@ -17,15 +17,15 @@
   },
   "exports": {
     ".": {
-      "require": "./lib/node/index.js",
+      "require": "./lib/index.cjs",
       "default": "./lib/index.js"
     },
     "./*.js": {
-      "require": "./lib/node/*.js",
+      "require": "./lib/*.cjs",
       "default": "./lib/*.js"
     },
     "./*": {
-      "require": "./lib/node/*.js",
+      "require": "./lib/*.cjs",
       "default": "./lib/*.js"
     },
     "./src/*": "./src/*",

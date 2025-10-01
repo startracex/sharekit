@@ -9,12 +9,14 @@ export default defineConfig({
     {
       dir: "lib",
       format: "esm",
+      entryFileNames: "[name].js",
       preserveModules: true,
       sourcemap: true,
     },
     {
-      dir: "lib/node",
+      dir: "lib",
       format: "cjs",
+      entryFileNames: "[name].cjs",
       preserveModules: true,
       sourcemap: true,
     },
