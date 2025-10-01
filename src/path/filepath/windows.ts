@@ -7,17 +7,14 @@ import { equalsFold, startsWithFold } from "../../strings/utils.ts";
 import { PathBase } from "../internal/base.ts";
 import { LazyVolPathBuffer, validPath } from "../internal/shared.ts";
 
-const _separator = "\\";
+const separator = "\\";
 
-function isPathSeparator(c: string): boolean {
-  return c === _separator || c === "/";
-}
+const isPathSeparator = (c: string): boolean => c === separator || c === "/";
 
-function isUNC(path: string): boolean {
-  return path.length > 1 && isPathSeparator(path[0]) && isPathSeparator(path[1]);
-}
+const isUNC = (path: string): boolean =>
+  path.length > 1 && isPathSeparator(path[0]) && isPathSeparator(path[1]);
 
-function isReservedBaseName(name: string): boolean {
+const isReservedBaseName = (name: string): boolean => {
   if (name.length >= 3) {
     const prefix = name.substring(0, 3).toUpperCase();
     switch (prefix) {
@@ -44,9 +41,9 @@ function isReservedBaseName(name: string): boolean {
     return true;
   }
   return false;
-}
+};
 
-function isReservedName(name: string): boolean {
+const isReservedName = (name: string): boolean => {
   let base = name;
   const dotIndex = base.indexOf(".");
   const colonIndex = base.indexOf(":");
@@ -74,18 +71,18 @@ function isReservedName(name: string): boolean {
   }
 
   return false;
-}
+};
 
-function cutPath(path: string): [string, string, boolean] {
+const cutPath = (path: string): [string, string, boolean] => {
   for (let i = 0; i < path.length; i++) {
     if (isPathSeparator(path[i])) {
       return [path.substring(0, i), path.substring(i + 1), true];
     }
   }
   return [path, "", false];
-}
+};
 
-function uncLen(path: string, prefixLen: number): number {
+const uncLen = (path: string, prefixLen: number): number => {
   let count = 0;
   for (let i = prefixLen; i < path.length; i++) {
     if (isPathSeparator(path[i])) {
@@ -96,9 +93,9 @@ function uncLen(path: string, prefixLen: number): number {
     }
   }
   return path.length;
-}
+};
 
-function volumeNameLen(path: string): number {
+const volumeNameLen = (path: string): number => {
   if (path.length >= 2 && path[1] === ":") {
     return 2;
   }
@@ -129,9 +126,9 @@ function volumeNameLen(path: string): number {
   }
 
   return 0;
-}
+};
 
-function postClean(out: LazyVolPathBuffer): void {
+const postClean = (out: LazyVolPathBuffer): void => {
   if (out.volLen !== 0) {
     return;
   }
@@ -149,7 +146,7 @@ function postClean(out: LazyVolPathBuffer): void {
   }
 
   if (hasColon) {
-    out.prepend(".", _separator);
+    out.prepend(".", separator);
     return;
   }
 
@@ -159,34 +156,37 @@ function postClean(out: LazyVolPathBuffer): void {
     out.index(1) === "?" &&
     out.index(2) === "?"
   ) {
-    out.prepend(_separator, ".");
+    out.prepend(separator, ".");
   }
-}
+};
+
+const isAbs = (path: string): boolean => {
+  const l = volumeNameLen(path);
+
+  if (l === 0) {
+    return false;
+  }
+
+  if (isUNC(path)) {
+    return true;
+  }
+
+  const remainingPath = path.substring(l);
+
+  if (remainingPath === "") {
+    return false;
+  }
+
+  return isPathSeparator(remainingPath[0]);
+};
 
 export class PathWindows extends PathBase {
-  static separator: "\\" = _separator;
+  static separator: "\\" = separator;
   static isPathSeparator: (c: string) => boolean = isPathSeparator;
   static postClean: (out: LazyVolPathBuffer) => void = postClean;
-  static isAbs(path: string): boolean {
-    const l = volumeNameLen(path);
-
-    if (l === 0) {
-      return false;
-    }
-
-    if (isUNC(path)) {
-      return true;
-    }
-
-    const remainingPath = path.substring(l);
-
-    if (remainingPath === "") {
-      return false;
-    }
-
-    return isPathSeparator(remainingPath[0]);
-  }
+  static isAbs: (path: string) => boolean = isAbs;
   static volumeNameLen: (path: string) => number = volumeNameLen;
+  static stringEqual: (a: string, b: string) => boolean = equalsFold;
 
   static isLocal(path: string): boolean {
     if (path === "") {
@@ -314,20 +314,14 @@ export class PathWindows extends PathBase {
 
     return this.clean(result);
   }
-
-  static stringEqual(a: string, b: string): boolean {
-    return equalsFold(a, b);
-  }
 }
 
-const separator: (typeof PathWindows)["separator"] = PathWindows.separator;
 const ext: (typeof PathWindows)["ext"] = PathWindows.ext.bind(PathWindows);
 const base: (typeof PathWindows)["base"] = PathWindows.base.bind(PathWindows);
 const dir: (typeof PathWindows)["dir"] = PathWindows.dir.bind(PathWindows);
 const clean: (typeof PathWindows)["clean"] = PathWindows.clean.bind(PathWindows);
 const join: (typeof PathWindows)["join"] = PathWindows.join.bind(PathWindows);
 const rel: (typeof PathWindows)["rel"] = PathWindows.rel.bind(PathWindows);
-const isAbs: (typeof PathWindows)["isAbs"] = PathWindows.isAbs.bind(PathWindows);
 
 export { separator, ext, base, dir, clean, join, rel, isAbs };
 

@@ -5,11 +5,22 @@
  */
 import { PathBase } from "../internal/base.ts";
 
+const isAbs = (path: string): boolean => path.startsWith("/");
+
+const localize = (path: string): string | undefined => (path.includes("\x00") ? undefined : path);
+
+const separator = "/";
+
+const isPathSeparator = (c: string): boolean => c === "/";
+
+const stringEqual = (a: string, b: string): boolean => a === b;
+
 export class PathUnix extends PathBase {
-  static separator: "/" = "/";
-  static isPathSeparator(c: string): boolean {
-    return c === "/";
-  }
+  static separator: "/" = separator;
+  static isPathSeparator: (c: string) => boolean = isPathSeparator;
+  static stringEqual: (a: string, b: string) => boolean = stringEqual;
+  static localize: (path: string) => string | undefined = localize;
+  static isAbs: (path: string) => boolean = isAbs;
 
   static isLocal(path: string): boolean {
     if (path === "" || this.isAbs(path)) {
@@ -32,17 +43,6 @@ export class PathUnix extends PathBase {
     return path !== ".." && !path.startsWith("../");
   }
 
-  static localize(path: string): string | undefined {
-    if (path.includes("\x00")) {
-      return undefined;
-    }
-    return path;
-  }
-
-  static isAbs(path: string): boolean {
-    return path.startsWith("/");
-  }
-
   static join(...paths: string[]): string {
     const firstNonEmptyIndex = paths.findIndex((e) => e !== "");
 
@@ -52,20 +52,14 @@ export class PathUnix extends PathBase {
 
     return this.clean(paths.slice(firstNonEmptyIndex).join("/"));
   }
-
-  static stringEqual(a: string, b: string): boolean {
-    return a === b;
-  }
 }
 
-const separator: (typeof PathUnix)["separator"] = PathUnix.separator;
 const ext: (typeof PathUnix)["ext"] = PathUnix.ext.bind(PathUnix);
 const base: (typeof PathUnix)["base"] = PathUnix.base.bind(PathUnix);
 const dir: (typeof PathUnix)["dir"] = PathUnix.dir.bind(PathUnix);
 const clean: (typeof PathUnix)["clean"] = PathUnix.clean.bind(PathUnix);
 const join: (typeof PathUnix)["join"] = PathUnix.join.bind(PathUnix);
 const rel: (typeof PathUnix)["rel"] = PathUnix.rel.bind(PathUnix);
-const isAbs: (typeof PathUnix)["isAbs"] = PathUnix.isAbs.bind(PathUnix);
 
 export { separator, ext, base, dir, clean, join, rel, isAbs };
 

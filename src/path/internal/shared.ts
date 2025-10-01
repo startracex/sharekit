@@ -1,4 +1,4 @@
-export function validPath(name: string): boolean {
+export const validPath = (name: string): boolean => {
   if (name === ".") {
     return true;
   }
@@ -20,7 +20,7 @@ export function validPath(name: string): boolean {
   }
 
   return true;
-}
+};
 
 export class LazyPathBuffer {
   path: string;
