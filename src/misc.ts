@@ -1,2 +1,2 @@
-export * from "./misc/extract.js";
-export * from "./misc/ranger.js";
+export * from "./misc/extract.ts";
+export * from "./misc/ranger.ts";

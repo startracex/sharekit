@@ -3,7 +3,7 @@
  * - internal/filepathlite/path_unix.go
  * - path/filepath/path_unix.go
  */
-import { PathBase } from "../internal/base.js";
+import { PathBase } from "../internal/base.ts";
 
 export class PathUnix extends PathBase {
   static separator: "/" = "/";

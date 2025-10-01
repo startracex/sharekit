@@ -1,1 +1,1 @@
-export * from "./path/filepath/unix.js";
+export * from "./path/filepath/unix.ts";

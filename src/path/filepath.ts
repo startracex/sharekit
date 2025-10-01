@@ -1,5 +1,5 @@
-import { PathUnix } from "./filepath/unix.js";
-import { PathWindows } from "./filepath/windows.js";
+import { PathUnix } from "./filepath/unix.ts";
+import { PathWindows } from "./filepath/windows.ts";
 
 const Factory: typeof PathUnix | typeof PathWindows = globalThis.process?.platform === "win32" ? PathWindows : PathUnix;
 

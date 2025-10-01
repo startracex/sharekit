@@ -3,9 +3,9 @@
  * - internal/filepathlite/path_windows.go
  * - path/filepath/path_windows.go
  */
-import { equalsFold, startsWithFold } from "../../strings/utils.js";
-import { PathBase } from "../internal/base.js";
-import { LazyVolPathBuffer, validPath } from "../internal/shared.js";
+import { equalsFold, startsWithFold } from "../../strings/utils.ts";
+import { PathBase } from "../internal/base.ts";
+import { LazyVolPathBuffer, validPath } from "../internal/shared.ts";
 
 const _separator = "\\";
 

@@ -1,4 +1,4 @@
-import { trimStart } from "../strings/utils.js";
+import { trimStart } from "../strings/utils.ts";
 
 const MatchStrict = 0;
 const MatchDynamic = 1;

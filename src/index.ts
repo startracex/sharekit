@@ -1,6 +1,6 @@
-export * from "./is.js";
-export * from "./misc.js";
-export * from "./path.js";
-export * from "./router.js";
-export * from "./strings.js";
-export type * from "./types.js";
+export * from "./is.ts";
+export * from "./misc.ts";
+export * from "./path.ts";
+export * from "./router.ts";
+export * from "./strings.ts";
+export type * from "./types.ts";

@@ -1,2 +1,2 @@
-export * from "./strings/cases.js";
-export * from "./strings/utils.js";
+export * from "./strings/cases.ts";
+export * from "./strings/utils.ts";

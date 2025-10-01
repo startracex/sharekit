@@ -3,7 +3,7 @@
  * - internal/filepathlite/path_plan9.go
  * - path/filepath/path_plan9.go
  */
-import { PathUnix } from "./unix.js";
+import { PathUnix } from "./unix.ts";
 
 export class PathPlan9 extends PathUnix {
   static isAbs(path: string): boolean {

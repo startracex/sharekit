@@ -3,7 +3,7 @@
  * - internal/filepathlite/path.go
  * - path/filepath/path.go
  */
-import { LazyVolPathBuffer } from "./shared.js";
+import { LazyVolPathBuffer } from "./shared.ts";
 
 export class PathBase {
   static separator: "/" | "\\" = "/";
