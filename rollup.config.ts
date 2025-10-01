@@ -4,14 +4,7 @@ import { defineConfig } from "rollup";
 
 export default defineConfig({
   input: globSync("src/**/*.ts"),
-  plugins: [
-    oxc({
-      tsconfigCompilerOptions: {
-        declaration: true,
-        declarationMap: true,
-      },
-    }),
-  ],
+  plugins: [oxc()],
   output: [
     {
       dir: "lib",
