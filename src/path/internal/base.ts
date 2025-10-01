@@ -3,6 +3,7 @@
  * - internal/filepathlite/path.go
  * - path/filepath/path.go
  */
+import { slash, backslash } from "../../strings.ts";
 import { LazyVolPathBuffer } from "./shared.ts";
 
 export class PathBase {
@@ -14,12 +15,12 @@ export class PathBase {
 
   static fromSlash(path: string): string {
     if (this.separator === "/") return path;
-    return path.replaceAll("/", this.separator);
+    return backslash(path);
   }
 
   static toSlash(path: string): string {
     if (this.separator === "/") return path;
-    return path.replaceAll(this.separator, "/");
+    return slash(path);
   }
 
   static split(path: string): [string, string] {

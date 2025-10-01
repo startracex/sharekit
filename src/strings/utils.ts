@@ -39,3 +39,8 @@ export const endsWithFold = (path: string, suffix: string): boolean => {
 };
 
 export const equalsFold = (a: string, b: string): boolean => a.toUpperCase() === b.toUpperCase();
+
+const slashRegExp = /\//g;
+const backslashRegExp = /\\/g;
+export const slash = (s: string): string => s.replace(slashRegExp, "/");
+export const backslash = (s: string): string => s.replace(backslashRegExp, "\\");
