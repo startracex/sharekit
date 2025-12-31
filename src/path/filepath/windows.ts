@@ -322,8 +322,10 @@ const dir: (typeof PathWindows)["dir"] = PathWindows.dir.bind(PathWindows);
 const clean: (typeof PathWindows)["clean"] = PathWindows.clean.bind(PathWindows);
 const join: (typeof PathWindows)["join"] = PathWindows.join.bind(PathWindows);
 const rel: (typeof PathWindows)["rel"] = PathWindows.rel.bind(PathWindows);
+const pretty: (typeof PathWindows)["pretty"] = PathWindows.pretty.bind(PathWindows);
 
 export {
+  pretty,
   separator,
   ext,
   base,

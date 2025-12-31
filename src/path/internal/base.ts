@@ -274,4 +274,12 @@ export class PathBase {
   static join: (...paths: string[]) => string;
 
   static isAbs: (path: string) => boolean;
+
+  static pretty(s: string): string {
+    s = this.clean(s);
+    if (s == "." || s == ".." || this.isAbs(s)) {
+      return s;
+    }
+    return `.${this.separator}${s}`;
+  }
 }

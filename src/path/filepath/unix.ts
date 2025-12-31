@@ -60,8 +60,10 @@ const dir: (typeof PathUnix)["dir"] = PathUnix.dir.bind(PathUnix);
 const clean: (typeof PathUnix)["clean"] = PathUnix.clean.bind(PathUnix);
 const join: (typeof PathUnix)["join"] = PathUnix.join.bind(PathUnix);
 const rel: (typeof PathUnix)["rel"] = PathUnix.rel.bind(PathUnix);
+const pretty: (typeof PathUnix)["pretty"] = PathUnix.pretty.bind(PathUnix);
 
 export {
+  pretty,
   separator,
   ext,
   base,
