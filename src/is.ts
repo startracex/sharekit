@@ -49,7 +49,7 @@ export const isTemplateStringArray = (value: any): value is TemplateStringsArray
   isArray(value) && isArray((value as any).raw);
 
 export const isConstructor = <T = any>(value: any): value is Constructor<T> =>
-  isFunction(value) && value.prototype.constructor === value;
+  isFunction(value) && value.prototype !== undefined && value.prototype.constructor === value;
 
 const asyncFnCons = (async () => {}).constructor;
 
@@ -73,7 +73,8 @@ export const isIterable = <T = any, TR = any, TN = any>(value: any): value is It
 
 export const isAsyncIterable = <T = any, TR = any, TN = any>(
   value: any,
-): value is AsyncIterable<T, TR, TN> => !isNullable(value) && isFunction(value[Symbol.asyncIterator]);
+): value is AsyncIterable<T, TR, TN> =>
+  !isNullable(value) && isFunction(value[Symbol.asyncIterator]);
 
 export const isThenable = <T = any>(value: any): value is PromiseLike<T> =>
   (isObject(value) || isFunction(value)) && isFunction((value as any).then);
