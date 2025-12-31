@@ -1,6 +1,6 @@
 {
   "name": "sharekit",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Shareable utility toolkit",
   "type": "module",
   "scripts": {
