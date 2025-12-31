@@ -61,9 +61,11 @@ const clean: typeof PathUnix.clean = PathUnix.clean.bind(PathUnix);
 const join: typeof PathUnix.join = PathUnix.join.bind(PathUnix);
 const rel: typeof PathUnix.rel = PathUnix.rel.bind(PathUnix);
 const pretty: typeof PathUnix.pretty = PathUnix.pretty.bind(PathUnix);
+const upDir: typeof PathUnix.upDir = PathUnix.upDir.bind(PathUnix);
 
 export {
   pretty,
+  upDir,
   separator,
   ext,
   base,

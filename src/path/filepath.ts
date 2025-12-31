@@ -13,9 +13,11 @@ const join: typeof Factory.join = Factory.join.bind(Factory);
 const rel: typeof Factory.rel = Factory.rel.bind(Factory);
 const isAbs: typeof Factory.isAbs = Factory.isAbs.bind(Factory);
 const pretty: typeof Factory.pretty = Factory.pretty.bind(Factory);
+const upDir: typeof Factory.upDir = Factory.upDir.bind(Factory);
 
 export {
   pretty,
+  upDir,
   separator,
   ext,
   base,

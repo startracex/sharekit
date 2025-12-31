@@ -282,4 +282,19 @@ export class PathBase {
     }
     return `.${this.separator}${s}`;
   }
+
+  static *upDir(s: string): Generator<string, void, unknown> {
+    if (!this.isAbs(s)) {
+      return;
+    }
+    let currentDir = this.clean(s);
+    for (;;) {
+      yield currentDir;
+      const parentDir = this.dir(s);
+      if (parentDir === currentDir) {
+        break;
+      }
+      currentDir = parentDir;
+    }
+  }
 }
