@@ -330,6 +330,10 @@ const dir: typeof PathWindows.dir = PathWindows.dir.bind(PathWindows);
 const clean: typeof PathWindows.clean = PathWindows.clean.bind(PathWindows);
 const join: typeof PathWindows.join = PathWindows.join.bind(PathWindows);
 const rel: typeof PathWindows.rel = PathWindows.rel.bind(PathWindows);
+const localize: typeof PathWindows.localize = PathWindows.localize.bind(PathWindows);
+const isLocal: typeof PathWindows.isLocal = PathWindows.isLocal.bind(PathWindows);
+const fromSlash: typeof PathWindows.fromSlash = PathWindows.fromSlash.bind(PathWindows);
+const toSlash: typeof PathWindows.toSlash = PathWindows.toSlash.bind(PathWindows);
 const pretty: typeof PathWindows.pretty = PathWindows.pretty.bind(PathWindows);
 const upDir: typeof PathWindows.upDir = PathWindows.upDir.bind(PathWindows);
 
@@ -344,6 +348,10 @@ export {
   join,
   rel,
   isAbs,
+  isLocal,
+  localize,
+  fromSlash,
+  toSlash,
 
   // node:path named exports
   separator as sep,
