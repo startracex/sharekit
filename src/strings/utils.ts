@@ -38,6 +38,10 @@ export const endsWithFold = (s: string, suffix: string): boolean => {
   return s.toUpperCase().endsWith(suffix.toUpperCase());
 };
 
+export const includesFold = (s: string, ss: string): boolean => {
+  return s.toUpperCase().includes(ss.toUpperCase());
+};
+
 export const equalsFold = (a: string, b: string): boolean => a.toUpperCase() === b.toUpperCase();
 
 const slashRegExp = /\//g;
