@@ -40,7 +40,7 @@ export const isPrimitive = (
 ): value is null | undefined | boolean | string | symbol | number | bigint =>
   !isObject(value) && !isFunction(value);
 
-export const isArray: (value: any) => value is any[] = Array.isArray;
+export const isArray: <T = any>(value: any) => value is T[] = Array.isArray;
 
 export const isArrayLike = <T = any>(value: any): value is ArrayLike<T> =>
   isArray(value) || (isObject(value) && isNumber((value as any).length));
