@@ -1,3 +1,5 @@
+import { upper } from "./cases.ts";
+
 export const trimStartFunc = (s: string, fn: (s: string) => boolean): string => {
   if (!s || !fn) {
     return s;
@@ -30,19 +32,15 @@ export const trimEnd = (s: string, spec: string): string => trimEndFunc(s, (str)
 
 export const trim = (s: string, spec: string): string => trimFunc(s, (str) => str === spec);
 
-export const startsWithFold = (s: string, prefix: string): boolean => {
-  return s.toUpperCase().startsWith(prefix.toUpperCase());
-};
+export const startsWithFold = (s: string, prefix: string): boolean =>
+  upper(s).startsWith(upper(prefix));
 
-export const endsWithFold = (s: string, suffix: string): boolean => {
-  return s.toUpperCase().endsWith(suffix.toUpperCase());
-};
+export const endsWithFold = (s: string, suffix: string): boolean =>
+  upper(s).endsWith(upper(suffix));
 
-export const includesFold = (s: string, ss: string): boolean => {
-  return s.toUpperCase().includes(ss.toUpperCase());
-};
+export const includesFold = (s: string, ss: string): boolean => upper(s).includes(upper(ss));
 
-export const equalsFold = (a: string, b: string): boolean => a.toUpperCase() === b.toUpperCase();
+export const equalsFold = (a: string, b: string): boolean => upper(a) === upper(b);
 
 const slashRegExp = /\//g;
 const backslashRegExp = /\\/g;
