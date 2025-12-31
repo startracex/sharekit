@@ -1,27 +1,27 @@
-export const trimStartFunc = (s: string, func: (s: string) => boolean): string => {
-  if (!s || !func) {
+export const trimStartFunc = (s: string, fn: (s: string) => boolean): string => {
+  if (!s || !fn) {
     return s;
   }
   let start = 0;
-  while (start < s.length && func(s.slice(start, start + 1))) {
+  while (start < s.length && fn(s.slice(start, start + 1))) {
     start += 1;
   }
   return s.slice(start);
 };
 
-export const trimEndFunc = (s: string, func: (s: string) => boolean): string => {
-  if (!s || !func) {
+export const trimEndFunc = (s: string, fn: (s: string) => boolean): string => {
+  if (!s || !fn) {
     return s;
   }
   let end = s.length;
-  while (end > 0 && func(s.slice(end - 1, end))) {
+  while (end > 0 && fn(s.slice(end - 1, end))) {
     end -= 1;
   }
   return s.slice(0, end);
 };
 
-export const trimFunc = (s: string, func: (_: string) => boolean): string =>
-  trimStartFunc(trimEndFunc(s, func), func);
+export const trimFunc = (s: string, fn: (s: string) => boolean): string =>
+  trimStartFunc(trimEndFunc(s, fn), fn);
 
 export const trimStart = (s: string, spec: string): string =>
   trimStartFunc(s, (str) => str === spec);
@@ -30,12 +30,12 @@ export const trimEnd = (s: string, spec: string): string => trimEndFunc(s, (str)
 
 export const trim = (s: string, spec: string): string => trimFunc(s, (str) => str === spec);
 
-export const startsWithFold = (path: string, prefix: string): boolean => {
-  return path.toUpperCase().startsWith(prefix.toUpperCase());
+export const startsWithFold = (s: string, prefix: string): boolean => {
+  return s.toUpperCase().startsWith(prefix.toUpperCase());
 };
 
-export const endsWithFold = (path: string, suffix: string): boolean => {
-  return path.toUpperCase().endsWith(suffix.toUpperCase());
+export const endsWithFold = (s: string, suffix: string): boolean => {
+  return s.toUpperCase().endsWith(suffix.toUpperCase());
 };
 
 export const equalsFold = (a: string, b: string): boolean => a.toUpperCase() === b.toUpperCase();
