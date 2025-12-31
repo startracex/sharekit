@@ -316,13 +316,13 @@ export class PathWindows extends PathBase {
   }
 }
 
-const ext: (typeof PathWindows)["ext"] = PathWindows.ext.bind(PathWindows);
-const base: (typeof PathWindows)["base"] = PathWindows.base.bind(PathWindows);
-const dir: (typeof PathWindows)["dir"] = PathWindows.dir.bind(PathWindows);
-const clean: (typeof PathWindows)["clean"] = PathWindows.clean.bind(PathWindows);
-const join: (typeof PathWindows)["join"] = PathWindows.join.bind(PathWindows);
-const rel: (typeof PathWindows)["rel"] = PathWindows.rel.bind(PathWindows);
-const pretty: (typeof PathWindows)["pretty"] = PathWindows.pretty.bind(PathWindows);
+const ext: typeof PathWindows.ext = PathWindows.ext.bind(PathWindows);
+const base: typeof PathWindows.base = PathWindows.base.bind(PathWindows);
+const dir: typeof PathWindows.dir = PathWindows.dir.bind(PathWindows);
+const clean: typeof PathWindows.clean = PathWindows.clean.bind(PathWindows);
+const join: typeof PathWindows.join = PathWindows.join.bind(PathWindows);
+const rel: typeof PathWindows.rel = PathWindows.rel.bind(PathWindows);
+const pretty: typeof PathWindows.pretty = PathWindows.pretty.bind(PathWindows);
 
 export {
   pretty,

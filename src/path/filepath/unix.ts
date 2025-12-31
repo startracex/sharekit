@@ -5,13 +5,13 @@
  */
 import { PathBase } from "../internal/base.ts";
 
-const isAbs = (path: string): boolean => path.startsWith("/");
+const separator = "/";
+
+const isAbs = (path: string): boolean => path.startsWith(separator);
 
 const localize = (path: string): string | undefined => (path.includes("\x00") ? undefined : path);
 
-const separator = "/";
-
-const isPathSeparator = (c: string): boolean => c === "/";
+const isPathSeparator = (c: string): boolean => c === separator;
 
 const stringEqual = (a: string, b: string): boolean => a === b;
 
@@ -54,13 +54,13 @@ export class PathUnix extends PathBase {
   }
 }
 
-const ext: (typeof PathUnix)["ext"] = PathUnix.ext.bind(PathUnix);
-const base: (typeof PathUnix)["base"] = PathUnix.base.bind(PathUnix);
-const dir: (typeof PathUnix)["dir"] = PathUnix.dir.bind(PathUnix);
-const clean: (typeof PathUnix)["clean"] = PathUnix.clean.bind(PathUnix);
-const join: (typeof PathUnix)["join"] = PathUnix.join.bind(PathUnix);
-const rel: (typeof PathUnix)["rel"] = PathUnix.rel.bind(PathUnix);
-const pretty: (typeof PathUnix)["pretty"] = PathUnix.pretty.bind(PathUnix);
+const ext: typeof PathUnix.ext = PathUnix.ext.bind(PathUnix);
+const base: typeof PathUnix.base = PathUnix.base.bind(PathUnix);
+const dir: typeof PathUnix.dir = PathUnix.dir.bind(PathUnix);
+const clean: typeof PathUnix.clean = PathUnix.clean.bind(PathUnix);
+const join: typeof PathUnix.join = PathUnix.join.bind(PathUnix);
+const rel: typeof PathUnix.rel = PathUnix.rel.bind(PathUnix);
+const pretty: typeof PathUnix.pretty = PathUnix.pretty.bind(PathUnix);
 
 export {
   pretty,
