@@ -22,6 +22,14 @@ export class PathUnix extends PathBase {
   static localize: (path: string) => string | undefined = localize;
   static isAbs: (path: string) => boolean = isAbs;
 
+  static fromSlash(path: string): string {
+    return path;
+  }
+
+  static toSlash(path: string): string {
+    return path;
+  }
+
   static isLocal(path: string): boolean {
     if (path === "" || this.isAbs(path)) {
       return false;
@@ -51,6 +59,10 @@ export class PathUnix extends PathBase {
     }
 
     return this.clean(paths.slice(firstNonEmptyIndex).join("/"));
+  }
+
+  static volumeNameLen(): number {
+    return 0;
   }
 }
 

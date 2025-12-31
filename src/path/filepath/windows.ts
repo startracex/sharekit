@@ -3,9 +3,9 @@
  * - internal/filepathlite/path_windows.go
  * - path/filepath/path_windows.go
  */
-import { equalsFold, startsWithFold } from "../../strings/utils.ts";
+import { backslash, equalsFold, slash, startsWithFold } from "../../strings/utils.ts";
 import { PathBase } from "../internal/base.ts";
-import { LazyVolPathBuffer, validPath } from "../internal/shared.ts";
+import { type LazyVolPathBuffer, validPath } from "../internal/shared.ts";
 
 const separator = "\\";
 
@@ -187,6 +187,14 @@ export class PathWindows extends PathBase {
   static isAbs: (path: string) => boolean = isAbs;
   static volumeNameLen: (path: string) => number = volumeNameLen;
   static stringEqual: (a: string, b: string) => boolean = equalsFold;
+
+  static fromSlash(path: string): string {
+    return backslash(path);
+  }
+
+  static toSlash(path: string): string {
+    return slash(path);
+  }
 
   static isLocal(path: string): boolean {
     if (path === "") {

@@ -3,25 +3,63 @@
  * - internal/filepathlite/path.go
  * - path/filepath/path.go
  */
-import { slash, backslash } from "../../strings.ts";
 import { LazyVolPathBuffer } from "./shared.ts";
 
 export class PathBase {
-  static separator: "/" | "\\" = "/";
+  /**
+   * @abstract
+   */
+  static isPathSeparator: (s: string) => boolean;
 
-  static isPathSeparator(c: string): boolean {
-    return c === "/";
-  }
+  /**
+   * @abstract
+   */
+  static separator: "/" | "\\";
 
-  static fromSlash(path: string): string {
-    if (this.separator === "/") return path;
-    return backslash(path);
-  }
+  /**
+   * @abstract
+   */
+  static volumeNameLen: (path: string) => number;
 
-  static toSlash(path: string): string {
-    if (this.separator === "/") return path;
-    return slash(path);
-  }
+  /**
+   * @abstract
+   */
+  static postClean?: (out: LazyVolPathBuffer) => void;
+
+  /**
+   * @abstract
+   */
+  static isAbs: (path: string) => boolean;
+
+  /**
+   * @abstract
+   */
+  static stringEqual: (a: string, b: string) => boolean;
+
+  /**
+   * @abstract
+   */
+  static isLocal: (path: string) => boolean;
+
+  /**
+   * @abstract
+   */
+  static localize: (path: string) => string | undefined;
+
+  /**
+   * @abstract
+   */
+  static join: (...paths: string[]) => string;
+
+  /**
+   * @abstract
+   */
+  static fromSlash: (path: string) => string;
+
+  /**
+   * @abstract
+   */
+  static toSlash: (path: string) => string;
 
   static split(path: string): [string, string] {
     const volLen = this.volumeNameLen(path);
@@ -179,14 +217,8 @@ export class PathBase {
     return this.fromSlash(out.string());
   }
 
-  static postClean?: (out: LazyVolPathBuffer) => void;
-
   static volumeName(path: string): string {
     return this.fromSlash(path.slice(0, this.volumeNameLen(path)));
-  }
-
-  static volumeNameLen(path: string): number {
-    return 0;
   }
 
   static rel(basepath: string, targpath: string): string | undefined {
@@ -264,16 +296,6 @@ export class PathBase {
 
     return targWithoutVol.substring(t0);
   }
-
-  static stringEqual: (a: string, b: string) => boolean;
-
-  static isLocal: (path: string) => boolean;
-
-  static localize: (path: string) => string | undefined;
-
-  static join: (...paths: string[]) => string;
-
-  static isAbs: (path: string) => boolean;
 
   static pretty(s: string): string {
     s = this.clean(s);
