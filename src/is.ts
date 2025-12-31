@@ -69,11 +69,11 @@ export const isAsyncGeneratorFunction = (
   isFunction(value) && value.constructor === asyncGeneratorFnCons;
 
 export const isIterable = <T = any, TR = any, TN = any>(value: any): value is Iterable<T, TR, TN> =>
-  isObject(value) && isFunction(value[Symbol.iterator]);
+  !isNullable(value) && isFunction(value[Symbol.iterator]);
 
 export const isAsyncIterable = <T = any, TR = any, TN = any>(
   value: any,
-): value is AsyncIterable<T, TR, TN> => isObject(value) && isFunction(value[Symbol.asyncIterator]);
+): value is AsyncIterable<T, TR, TN> => !isNullable(value) && isFunction(value[Symbol.asyncIterator]);
 
 export const isThenable = <T = any>(value: any): value is PromiseLike<T> =>
   (isObject(value) || isFunction(value)) && isFunction((value as any).then);
