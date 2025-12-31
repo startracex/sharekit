@@ -42,5 +42,5 @@ export const equalsFold = (a: string, b: string): boolean => a.toUpperCase() ===
 
 const slashRegExp = /\//g;
 const backslashRegExp = /\\/g;
-export const slash = (s: string): string => s.replace(slashRegExp, "/");
-export const backslash = (s: string): string => s.replace(backslashRegExp, "\\");
+export const slash = (s: string): string => s.replace(backslashRegExp, "/");
+export const backslash = (s: string): string => s.replace(slashRegExp, "\\");
