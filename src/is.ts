@@ -1,7 +1,12 @@
 import type { Constructor } from "./types.ts";
 
-export const isNullable = (value: any): value is null | undefined =>
+export const isNullish = (value: any): value is null | undefined =>
   value === null || value === undefined;
+
+/**
+ * @deprecated use {@link isNullish} instead.
+ */
+export const isNullable: typeof isNullish = isNullish;
 
 export const isNumerical = (value: any): boolean => !Number.isNaN(+value);
 
@@ -66,12 +71,12 @@ export const isAsyncGeneratorFunction = (
   isFunction(value) && value instanceof asyncGeneratorFC;
 
 export const isIterable = <T = any, TR = any, TN = any>(value: any): value is Iterable<T, TR, TN> =>
-  !isNullable(value) && isFunction(value[Symbol.iterator]);
+  !isNullish(value) && isFunction(value[Symbol.iterator]);
 
 export const isAsyncIterable = <T = any, TR = any, TN = any>(
   value: any,
 ): value is AsyncIterable<T, TR, TN> =>
-  !isNullable(value) && isFunction(value[Symbol.asyncIterator]);
+  !isNullish(value) && isFunction(value[Symbol.asyncIterator]);
 
 export const isThenable = <T = any>(value: any): value is PromiseLike<T> =>
   (isObject(value) || isFunction(value)) && isFunction((value as any).then);
