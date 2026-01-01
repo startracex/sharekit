@@ -1,5 +1,12 @@
 import type { Constructor } from "./types.ts";
 
+const { isFrozen, getPrototypeOf } = Object;
+const { isSafeInteger } = Number;
+
+const asyncFC = (async () => {}).constructor;
+const generatorFC = function* () {}.constructor;
+const asyncGeneratorFC = async function* () {}.constructor;
+
 export const isNullish = (value: any): value is null | undefined =>
   value === null || value === undefined;
 
@@ -30,12 +37,12 @@ export const isPlainObject = (value: any): value is Record<PropertyKey, any> => 
   if (!isObject(value)) {
     return false;
   }
-  const p = Object.getPrototypeOf(value);
+  const p = getPrototypeOf(value);
   return p === Object.prototype || p === null;
 };
 
 export const isWeakKey = (value: any): value is WeakKey =>
-  isSymbol(value) || isObject(value) || isFunction(value);
+  (isSymbol(value) && Symbol.keyFor(value) === undefined) || isObject(value) || isFunction(value);
 
 export const isPropertyKey = (value: any): value is PropertyKey =>
   isString(value) || isSymbol(value) || isNumber(value);
@@ -47,24 +54,44 @@ export const isPrimitive = (
 
 export const isArray: <T = any>(value: any) => value is T[] = Array.isArray;
 
-export const isArrayLike = <T = any>(value: any): value is ArrayLike<T> =>
-  isArray(value) || (isObject(value) && isNumber((value as any).length));
+const isSafeUint = (value: any): value is number => isSafeInteger(value) && value >= 0;
 
-export const isTemplateStringArray = (value: any): value is TemplateStringsArray =>
-  isArray(value) && isArray((value as any).raw);
+export const isArrayLike = <T = any>(value: any): value is ArrayLike<T> =>
+  isArray(value) || (isObject(value) && isSafeUint((value as Array<any>).length));
+
+export const isTemplateStringArray = (value: any): value is TemplateStringsArray => {
+  if (isArray(value) && isFrozen(value)) {
+    const { raw } = value as Array<any> & { raw: Array<any> };
+    if (isArray(raw) && isFrozen(raw)) {
+      const { length } = value;
+      if (length < 1 || length !== raw.length) {
+        return false;
+      }
+      for (let i = 0; i < length; ++i) {
+        const rawString = raw[i];
+        const cookedStringOrUndefined = value[i];
+        if (
+          !(isString(cookedStringOrUndefined) || cookedStringOrUndefined === undefined) ||
+          !isString(rawString)
+        ) {
+          return false;
+        }
+      }
+      return true
+    }
+  }
+  return false;
+};
 
 export const isConstructor = <T = any>(value: any): value is Constructor<T> =>
   isFunction(value) && value.prototype !== undefined && value.prototype.constructor === value;
 
-const asyncFC = (async () => {}).constructor;
 export const isAsyncFunction = (value: any): value is (...args: any[]) => Promise<any> =>
   isFunction(value) && value instanceof asyncFC;
 
-const generatorFC = function* () {}.constructor;
 export const isGeneratorFunction = (value: any): value is (...args: any[]) => Generator<any> =>
   isFunction(value) && value instanceof generatorFC;
 
-const asyncGeneratorFC = async function* () {}.constructor;
 export const isAsyncGeneratorFunction = (
   value: any,
 ): value is (...args: any[]) => AsyncGenerator<any> =>
