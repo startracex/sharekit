@@ -138,6 +138,11 @@ export const isTemplateStringArray = (value: any): value is TemplateStringsArray
 };
 
 /**
+ * Alias of {@link isTemplateStringArray}.
+ */
+export const isTemplateOject: typeof isTemplateStringArray = isTemplateStringArray;
+
+/**
  * Returns true if value is a constructor.
  */
 export const isConstructor = <T = any>(value: any): value is Constructor<T> =>
@@ -198,6 +203,10 @@ export const isAsyncIterable = <T = any, TR = any, TN = any>(
 export const isThenable = <T = any>(value: any): value is PromiseLike<T> =>
   (isObject(value) || isFunction(value)) && isFunction((value as any).then);
 
+/**
+ * Alias of {@link isThenable}.
+ */
+export const isPromiseLike: typeof isThenable = isThenable;
 
 /**
  * Validate that the value is a Promise or has then and catch methods.
