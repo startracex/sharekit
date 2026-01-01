@@ -51,22 +51,19 @@ export const isTemplateStringArray = (value: any): value is TemplateStringsArray
 export const isConstructor = <T = any>(value: any): value is Constructor<T> =>
   isFunction(value) && value.prototype !== undefined && value.prototype.constructor === value;
 
-const asyncFnCons = (async () => {}).constructor;
-
+const asyncFC = (async () => {}).constructor;
 export const isAsyncFunction = (value: any): value is (...args: any[]) => Promise<any> =>
-  isFunction(value) && value.constructor === asyncFnCons;
+  isFunction(value) && value instanceof asyncFC;
 
-const generatorFnCons = function* () {}.constructor;
-
+const generatorFC = function* () {}.constructor;
 export const isGeneratorFunction = (value: any): value is (...args: any[]) => Generator<any> =>
-  isFunction(value) && value.constructor === generatorFnCons;
+  isFunction(value) && value instanceof generatorFC;
 
-const asyncGeneratorFnCons = async function* () {}.constructor;
-
+const asyncGeneratorFC = async function* () {}.constructor;
 export const isAsyncGeneratorFunction = (
   value: any,
 ): value is (...args: any[]) => AsyncGenerator<any> =>
-  isFunction(value) && value.constructor === asyncGeneratorFnCons;
+  isFunction(value) && value instanceof asyncGeneratorFC;
 
 export const isIterable = <T = any, TR = any, TN = any>(value: any): value is Iterable<T, TR, TN> =>
   !isNullable(value) && isFunction(value[Symbol.iterator]);
