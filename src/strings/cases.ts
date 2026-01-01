@@ -1,14 +1,29 @@
 const splitWordsRegexp = /[A-Z][^A-Z_-\s]*|[^A-Z_-\s]+/g;
 
+/**
+ * split string by words.
+ */
 export const splitWords = (s: string): string[] => s.match(splitWordsRegexp) || [];
 
+/**
+ * CONVERTS A STRING TO UPPERCASE.
+ */
 export const upper = <T extends string>(s: T): Uppercase<T> => s.toUpperCase() as any;
 
+/**
+ * converts a string to lowercase.
+ */
 export const lower = <T extends string>(s: T): Lowercase<T> => s.toLowerCase() as any;
 
+/**
+ * Converts the first letter of the string to uppercase.
+ */
 export const capitalize = <T extends string>(s: T): Capitalize<T> =>
   (upper(s.slice(0, 1)) + s.slice(1)) as any;
 
+/**
+ * converts the first letter of the string to lowercase.
+ */
 export const uncapitalize = <T extends string>(s: T): Uncapitalize<T> =>
   (lower(s.slice(0, 1)) + s.slice(1)) as any;
 
