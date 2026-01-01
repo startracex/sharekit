@@ -70,6 +70,12 @@ export const isAsyncGeneratorFunction = (
 ): value is (...args: any[]) => AsyncGenerator<any> =>
   isFunction(value) && value instanceof asyncGeneratorFC;
 
+export const isDisposable = (value: any): value is Disposable =>
+  !isNullish(value) && isFunction(value[Symbol.dispose]);
+
+export const isAsyncDisposable = (value: any): value is AsyncDisposable =>
+  !isNullish(value) && isFunction(value[Symbol.asyncDispose]);
+
 export const isIterable = <T = any, TR = any, TN = any>(value: any): value is Iterable<T, TR, TN> =>
   !isNullish(value) && isFunction(value[Symbol.iterator]);
 
